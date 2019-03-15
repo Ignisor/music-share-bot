@@ -52,4 +52,4 @@ class UrlsExtractor(object):
         """
         for provider in ALL_PROVIDERS:
             if provider.is_music_url(url):
-                return MusicUrl(url, provider)
+                return MusicUrl(url, provider())

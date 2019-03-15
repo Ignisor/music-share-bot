@@ -10,7 +10,7 @@ YOUTUBE_API_KEY = 'AIzaSyDVjLd6MAuJsDXJhbxjVmOAaoduoO4K1Bs'
 class YouTube(MusicProvider):
     NAME = 'YouTube'
     _ID_REGEX = re.compile(r'\?.*v=([\w]+)')
-    __MUSIC_URL = 'https://youtube.com/watch?v={}'
+    _MUSIC_URL = 'https://youtube.com/watch?v={}'
 
     def get_music_name(self, url):
         api_url = 'https://www.googleapis.com/youtube/v3/videos'
@@ -45,7 +45,7 @@ class YouTube(MusicProvider):
 
         data = resp.json()
         video_id = data['items'][0]['id']['videoId']
-        url = self.__MUSIC_URL.format(video_id)
+        url = self._MUSIC_URL.format(video_id)
 
         return url
 

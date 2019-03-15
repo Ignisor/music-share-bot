@@ -1,7 +1,10 @@
-from core.urls import MusicUrl                                                                                                                                    
+from core import process_message
 
 
-murl = MusicUrl('https://music.youtube.com/watch?v=6hUkyKBsGtQ')                                                                                                  
-name = murl.get_name()                                                                                                                                            
+msg = '''Bla bla bla
+https://music.youtube.com/watch?v=6hUkyKBsGtQ
+more bla
+https://music.youtube.com/watch?v=NxxjLD2pmlk&feature=share - bla bla
+'''
 
-print(name)
+print(process_message(msg))
