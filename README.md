@@ -1,1 +1,1 @@
-# Telegram bot for better music sharing
+# Bot for better music sharing
