@@ -1,3 +1,5 @@
+import re
+
 from core.providers import ALL_PROVIDERS
 
 
@@ -16,9 +18,38 @@ class MusicUrl(object):
 
     def __get_provider(self):
         for provider_cls in ALL_PROVIDERS:
-            provider_cls.is_music_url(self.url)
-        
-        return provider_cls()
+            if provider_cls.is_music_url(self.url):
+                return provider_cls()
+
+        raise ValueError(f'Unable to find provider for {self.url}')
 
     def get_name(self):
         return self.provider.get_music_name(self.url)
+
+
+class UrlsExtractor(object):
+    URL_REGEX = re.compile(r'(https?://[^\s]+)')
+
+    @classmethod
+    def get_urls(cls, message):
+        for match in cls.URL_REGEX.finditer(message):
+            yield match.group(1)
+
+    @classmethod
+    def get_music_urls(cls, message):
+        urls = cls.get_urls(message)
+        for url in urls:
+            music_url = cls.__to_music_url(url)
+            if music_url:
+                yield music_url
+
+    @classmethod
+    def __to_music_url(cls, url):
+        """
+        Returns instance of MusicUrl with provider if possible
+        :param url: url to parse
+        :return: MusicUrl
+        """
+        for provider in ALL_PROVIDERS:
+            if provider.is_music_url(url):
+                return MusicUrl(url, provider)
