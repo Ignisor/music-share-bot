@@ -1,7 +1,7 @@
 from core.providers import ALL_PROVIDERS
 from core.urls import UrlsExtractor
 
-BOT_RESPONSE = '{source_msg}\n---\n{music_urls}'
+BOT_RESPONSE = '{music_urls}'
 MUSIC_FROMAT = '{name}:\n{urls}'
 
 
@@ -14,16 +14,15 @@ def process_message(message):
 
         for provider in ALL_PROVIDERS:
             if type(url.provider) == provider:
-                alternative_url = url.url
+                alternative_url = f'[{provider.NAME}]({url.url})'
             else:
-                alternative_url = provider().get_music_url(name)
+                alternative_url = f'[{provider.NAME}]({provider().get_music_url(name)})'
 
             musics[name].append(alternative_url)
 
     musics_texts = []
     for name, music_urls in musics.items():
         musics_texts.append(MUSIC_FROMAT.format(name=name, urls='\n'.join(music_urls)))
-
-    response = BOT_RESPONSE.format(source_msg=message, music_urls='\n'.join(musics_texts))
+    response = BOT_RESPONSE.format(music_urls='\n'.join(musics_texts))
 
     return response
