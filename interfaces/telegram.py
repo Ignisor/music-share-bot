@@ -5,19 +5,39 @@ from botocore.vendored import requests
 
 
 class TelegramInterface(BotInterface):
-    API_TOKEN = '826840330:AAFxyiXEr3fAFCYdc-CdLch0AIFNodOXqi0'
+    API_TOKEN = '780290371:AAG2Ha8V7YPFleOq-BP8ZsrDEcl7EWAs7ew'
     API_URL = f'https://api.telegram.org/bot{API_TOKEN}/'
 
     def process_message(self, message_data):
         message = message_data['message']
         response = process_message(message['text'])
 
-        self._send_message(response, message['chat']['id'])
+        self._send_message(response, message['chat']['id'], message['message_id'])
 
-    def _send_message(self, message, chat_id):
+    def _send_message(self, message, chat_id, message_id):
         url = self.API_URL + 'sendMessage'
         params = {
             'text': message,
             'chat_id': chat_id,
+            'parse_mode': 'Markdown',
+            'reply_to_message_id': message_id,
+            'disable_web_page_preview': True
         }
         requests.get(url, params=params)
+
+    def get_updates(self, offset=None, timeout=30):
+        url = self.API_URL + 'getUpdates'
+        params = {'timeout': timeout, 'offset': offset}
+        resp = requests.get(url, params=params)
+        return resp.json()["result"]
+
+    def get_last_update(self):
+        get_result = self.get_updates()
+        if len(get_result) > 0:
+            last_update = get_result[-1]
+            return last_update
+        return
+
+    def get_chat_id(self, update):
+        chat_id = update['message']['chat']['id']
+        return chat_id

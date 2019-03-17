@@ -17,19 +17,24 @@ class YouTube(MusicProvider):
         params = {
             'part': 'snippet',
             'id': self.__id_from_url(url),
-            'fields': 'items/snippet/title,items/snippet/description',
+            'fields': 'items/snippet/title,items/snippet/description,items/snippet/tags',
             'key': YOUTUBE_API_KEY,
         }
-
         resp = requests.get(url=api_url, params=params)
         resp.raise_for_status()
 
         data = resp.json()
         description = data['items'][0]['snippet']['description']
         lines = [line for line in description.split('\n') if line]
-        title, performer = lines[1].split(' · ')
 
-        return f'{performer} - {title}'
+        # Temporary terrible solution due to youtube inconsistent descriptions
+        try:
+            title, performer = lines[1].split(' · ')
+            name = f'{performer} - {title}'
+        except ValueError:
+            name = data['items'][0]['snippet']['tags'][1]
+
+        return name
 
     def get_music_url(self, name):
         api_url = 'https://www.googleapis.com/youtube/v3/search'
