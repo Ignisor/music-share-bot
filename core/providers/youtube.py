@@ -32,8 +32,24 @@ class YouTube(MusicProvider):
             title, performer = lines[1].split(' · ')
             name = f'{performer} - {title}'
         except ValueError:
-            name = data['items'][0]['snippet']['tags'][1]
 
+            # Check for title
+            title = data['items'][0]['snippet']['title']
+
+            # It is an assumption that the very first tag is an performer itself
+            performer = data['items'][0]['snippet']['tags'][0]
+
+            if performer.lower() in title.lower():
+
+                # Remove strings like "(Official video)" or "feat" from title, not to mess with other providers search
+                name = re.sub(r"[\(\[].*?[\)\]]", "", title)
+                for dirt in ["ft.", "feat", "vs."]:
+                    if dirt in name:
+                        name = name.replace(dirt, "")
+            else:
+
+                # This is the case of auto generated videos without performer in title
+                name = f'{performer} - {title}'
         return name
 
     def get_music_url(self, name):
