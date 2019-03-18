@@ -1,7 +1,7 @@
 import base64
 import os
 
-import requests
+from botocore.vendored import requests
 from core.providers.base import MusicProvider
 
 SPOTIFY_API_TOKEN = None
