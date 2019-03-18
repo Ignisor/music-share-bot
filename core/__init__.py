@@ -19,9 +19,10 @@ def process_message(message):
                 try:
                     alternative_url = f'[{provider.NAME}]({provider().get_music_url(name)})'
                 except Exception:
-                    pass
+                    alternative_url = None
 
-            musics[name].append(alternative_url)
+            if alternative_url:
+                musics[name].append(alternative_url)
 
     musics_texts = []
     for name, music_urls in musics.items():
