@@ -1,46 +1,56 @@
 import os
 
+from telegram import Bot, Update, MessageEntity
+from telegram.ext import Dispatcher, MessageHandler, Filters, Updater
+
 from core import process_message
 from interfaces.base import BotInterface
-
-from botocore.vendored import requests
 
 
 class TelegramInterface(BotInterface):
     API_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
-    API_URL = f'https://api.telegram.org/bot{API_TOKEN}/'
 
-    def process_message(self, message_data):
-        message = message_data['message']
-        response = process_message(message['text'])
+    def __init__(self):
+        self.bot = Bot(self.API_TOKEN)
+        self.dispatcher = Dispatcher(self.bot, None, workers=0)
+        self._init_handlers()
+
+    def _init_handlers(self):
+        handlers = [
+            MessageHandler(
+                Filters.text & (Filters.entity(MessageEntity.URL) | Filters.entity(MessageEntity.TEXT_LINK)),
+                self._handle_message
+            )
+        ]
+
+        for handler in handlers:
+            self.dispatcher.add_handler(handler)
+
+    def _handle_message(self, update, context):
+        text = update.message.text
+        response = process_message(text)
 
         if response:
-            self._send_message(response, message['chat']['id'], message['message_id'])
+            update.message.reply_markdown(
+                response,
+                quote=True,
+                disable_web_page_preview=True,
+                disable_notification=True,
+            )
 
-    def _send_message(self, message, chat_id, message_id):
-        url = self.API_URL + 'sendMessage'
-        params = {
-            'text': message,
-            'chat_id': chat_id,
-            'parse_mode': 'Markdown',
-            'reply_to_message_id': message_id,
-            'disable_web_page_preview': True
-        }
-        requests.get(url, params=params)
+    def process_message(self, message_data):
+        update = Update.de_json(message_data, self.bot)
+        self.dispatcher.process_update(update)
 
-    def get_updates(self, offset=None, timeout=30):
-        url = self.API_URL + 'getUpdates'
-        params = {'timeout': timeout, 'offset': offset}
-        resp = requests.get(url, params=params)
-        return resp.json()['result']
 
-    def get_last_update(self):
-        get_result = self.get_updates()
-        if len(get_result) > 0:
-            last_update = get_result[-1]
-            return last_update
-        return
+class TelegramUpdaterInterface(TelegramInterface):
+    def __init__(self):
+        self.updater = Updater(token=self.API_TOKEN, use_context=True)
+        self.bot = self.updater.bot
+        self.dispatcher = self.updater.dispatcher
+        self._init_handlers()
 
-    def get_chat_id(self, update):
-        chat_id = update['message']['chat']['id']
-        return chat_id
+    def run_updater(self):
+        self.updater.start_polling()
+        self.updater.idle()
+        self.updater.stop()
