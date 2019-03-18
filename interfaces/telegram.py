@@ -31,7 +31,7 @@ class TelegramInterface(BotInterface):
         url = self.API_URL + 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(url, params=params)
-        return resp.json()["result"]
+        return resp.json()['result']
 
     def get_last_update(self):
         get_result = self.get_updates()
