@@ -1,7 +1,7 @@
 import os
 import re
 
-import from botocore.vendored import requests
+from botocore.vendored import requests
 
 from core.providers.base import MusicProvider
 
