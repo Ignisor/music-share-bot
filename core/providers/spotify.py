@@ -1,6 +1,6 @@
 import os
 
-import requests
+import from botocore.vendored import requests
 from core.providers.base import MusicProvider
 
 SPOTIFY_API_TOKEN = os.environ.get('SPOTIFY_API_TOKEN')
