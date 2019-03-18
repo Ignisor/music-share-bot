@@ -11,7 +11,7 @@ def lambda_handler(event, context):
         interface.process_message(message_data)
     except Exception as e:
         return {
-            'statusCode': 500,
+            'statusCode': 200,
             'body': f'error: {repr(e)}',
         }
 

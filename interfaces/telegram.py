@@ -14,7 +14,8 @@ class TelegramInterface(BotInterface):
         message = message_data['message']
         response = process_message(message['text'])
 
-        self._send_message(response, message['chat']['id'], message['message_id'])
+        if response:
+            self._send_message(response, message['chat']['id'], message['message_id'])
 
     def _send_message(self, message, chat_id, message_id):
         url = self.API_URL + 'sendMessage'

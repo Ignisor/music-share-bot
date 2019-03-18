@@ -27,6 +27,10 @@ def process_message(message):
     musics_texts = []
     for name, music_urls in musics.items():
         musics_texts.append(MUSIC_FROMAT.format(name=name, urls='\n'.join(music_urls)))
-    response = BOT_RESPONSE.format(music_urls='\n'.join(musics_texts))
+
+    if musics_texts:
+        response = BOT_RESPONSE.format(music_urls='\n'.join(musics_texts))
+    else:
+        response = None
 
     return response
