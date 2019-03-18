@@ -4,8 +4,6 @@ import os
 from botocore.vendored import requests
 from core.providers.base import MusicProvider
 
-SPOTIFY_API_TOKEN = None
-
 SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
 
@@ -28,8 +26,7 @@ class Spotify(MusicProvider):
             headers=headers,
             data={"grant_type": "client_credentials"}
         )
-        SPOTIFY_API_TOKEN = resp.json()['access_token']
-        return SPOTIFY_API_TOKEN
+        return resp.json()['access_token']
 
     def get_music_name(self, url):
         api_url = 'https://api.spotify.com/v1/tracks/{}'
@@ -61,14 +58,10 @@ class Spotify(MusicProvider):
 
     def get_headers(self):
 
-        if not SPOTIFY_API_TOKEN:
-            return {
-                "Authorization": f'Bearer {self.get_access_token()}'
-            }
-
         return {
-                "Authorization": f'Bearer {SPOTIFY_API_TOKEN}'
-            }
+            "Authorization": f'Bearer {self.get_access_token()}'
+        }
+
 
 
     @classmethod
