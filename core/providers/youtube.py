@@ -1,10 +1,11 @@
+import os
 import re
 
 import requests
 
 from core.providers.base import MusicProvider
 
-YOUTUBE_API_KEY = 'AIzaSyDVjLd6MAuJsDXJhbxjVmOAaoduoO4K1Bs'
+YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
 
 
 class YouTube(MusicProvider):

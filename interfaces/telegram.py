@@ -1,3 +1,5 @@
+import os
+
 from core import process_message
 from interfaces.base import BotInterface
 
@@ -5,7 +7,7 @@ from botocore.vendored import requests
 
 
 class TelegramInterface(BotInterface):
-    API_TOKEN = '780290371:AAG2Ha8V7YPFleOq-BP8ZsrDEcl7EWAs7ew'
+    API_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
     API_URL = f'https://api.telegram.org/bot{API_TOKEN}/'
 
     def process_message(self, message_data):

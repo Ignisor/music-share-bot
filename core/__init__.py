@@ -16,7 +16,10 @@ def process_message(message):
             if type(url.provider) == provider:
                 alternative_url = f'[{provider.NAME}]({url.url})'
             else:
-                alternative_url = f'[{provider.NAME}]({provider().get_music_url(name)})'
+                try:
+                    alternative_url = f'[{provider.NAME}]({provider().get_music_url(name)})'
+                except Exception:
+                    pass
 
             musics[name].append(alternative_url)
 
