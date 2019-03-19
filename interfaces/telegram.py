@@ -26,7 +26,7 @@ class TelegramInterface(BotInterface):
         for handler in handlers:
             self.dispatcher.add_handler(handler)
 
-    def _handle_message(self, update, context):
+    def _handle_message(self, bot, update):
         text = update.message.text
         response = process_message(text)
 
@@ -45,7 +45,7 @@ class TelegramInterface(BotInterface):
 
 class TelegramUpdaterInterface(TelegramInterface):
     def __init__(self):
-        self.updater = Updater(token=self.API_TOKEN, use_context=True)
+        self.updater = Updater(token=self.API_TOKEN, use_context=False)
         self.bot = self.updater.bot
         self.dispatcher = self.updater.dispatcher
         self._init_handlers()
