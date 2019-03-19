@@ -7,6 +7,9 @@ MUSIC_FROMAT = '{name}:\n{urls}'
 
 def process_message(message):
     msg_urls = UrlsExtractor.get_music_urls(message)
+    if not msg_urls:
+        return None
+
     musics = {}
     for url in msg_urls:
         name = url.get_name()
