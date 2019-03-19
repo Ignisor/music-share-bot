@@ -1,7 +1,7 @@
 import os
 
-from telegram import Bot, Update, MessageEntity
-from telegram.ext import Dispatcher, MessageHandler, Filters, Updater
+from package.telegram import Bot, Update, MessageEntity
+from package.telegram.ext import Dispatcher, MessageHandler, Filters, Updater
 
 from core import process_message
 from interfaces.base import BotInterface
