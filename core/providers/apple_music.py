@@ -38,7 +38,7 @@ class AppleMusic(MusicProvider):
         resp.raise_for_status()
 
         data = resp.json()
-        track_name = data['results'][0]['trackName']
+        track_name = re.sub(r"[\(\[].*?[\)\]]", "", data['results'][0]['trackName'])
         collection_id = data['results'][0]['collectionId']
         track_id = data['results'][0]['trackId']
         url = self._MUSIC_URL.format(track_name, collection_id, track_id)
