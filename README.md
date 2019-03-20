@@ -30,7 +30,7 @@ Python 3.7
 	-   YOUTUBE_API_KEY - API key for youtube API
 
 ### For development
-- Install local requirements:
+-   Install local requirements:
     ```bash
     pip install -r local_requirements.txt
     ```
