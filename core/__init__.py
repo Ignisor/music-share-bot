@@ -13,6 +13,8 @@ def process_message(message):
     musics = {}
     for url in msg_urls:
         name = url.get_name()
+        if not name:
+            return None
         musics[name] = []
 
         for provider in ALL_PROVIDERS:

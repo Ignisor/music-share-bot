@@ -1,5 +1,7 @@
 import re
+
 from botocore.vendored import requests
+
 from core.providers.base import MusicProvider
 
 
@@ -22,7 +24,8 @@ class AppleMusic(MusicProvider):
         if data['resultCount']:
             performer = data['results'][0]['artistName']
             title = data['results'][0]['trackName']
-        return f'{performer} - {title}'
+            return f'{performer} - {title}'
+        return None
 
     def get_music_url(self, name):
         api_url = 'https://itunes.apple.com/search?'
@@ -35,12 +38,10 @@ class AppleMusic(MusicProvider):
         resp.raise_for_status()
 
         data = resp.json()
-        url = ''
-        if data['resultCount']:
-            track_name = data['results'][0]['trackName']
-            collection_id = data['results'][0]['collectionId']
-            track_id = data['results'][0]['trackId']
-            url = self._MUSIC_URL.format(track_name, collection_id, track_id)
+        track_name = data['results'][0]['trackName']
+        collection_id = data['results'][0]['collectionId']
+        track_id = data['results'][0]['trackId']
+        url = self._MUSIC_URL.format(track_name, collection_id, track_id)
         return url
 
     def __id_from_url(self, url):
