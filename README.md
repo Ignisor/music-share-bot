@@ -9,6 +9,7 @@ Python 3.7
 -   [YouTube Music](https://music.youtube.com/)
 -   [YouTube](https://www.youtube.com/)
 -   [Spotify](https://www.spotify.com/)
+-   [Apple Music](https://www.apple.com/ru/apple-music/)
 
 ### Interfaces (apps and bots)
 -   [Telegram](https://telegram.org/)
