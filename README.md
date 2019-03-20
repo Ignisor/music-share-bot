@@ -6,28 +6,28 @@ Python 3.7
 
 ## Currently supported providers and interfaces
 ### Providers (music services)
-- [YouTube Music](https://music.youtube.com/)
-- [YouTube](https://www.youtube.com/)
-- [Spotify](https://www.spotify.com/)
+-   [YouTube Music](https://music.youtube.com/)
+-   [YouTube](https://www.youtube.com/)
+-   [Spotify](https://www.spotify.com/)
 
 ### Interfaces (apps and bots)
-- [Telegram](https://telegram.org/)
+-   [Telegram](https://telegram.org/)
 
 ## Installation
-- Clone the project:
+-   Clone the project:
     ```bash
     git clone git@github.com:inter-ikea/BSA-FBP-DWHETL-Logging.git
     ```
 
-- Install requirements:
+-   Install requirements:
     ```bash
     pip install -r requirements.txt
     ```
 
-- Required environment variables:
-	- SPOTIFY_CLIENT_ID - client ID for Spotify API
-	- SPOTIFY_CLIENT_SECRET - client secret key for Spotify API
-	- YOUTUBE_API_KEY - API key for youtube API
+-   Required environment variables:
+	-   SPOTIFY_CLIENT_ID - client ID for Spotify API
+	-   SPOTIFY_CLIENT_SECRET - client secret key for Spotify API
+	-   YOUTUBE_API_KEY - API key for youtube API
 
 ### For development
 - Install local requirements:
