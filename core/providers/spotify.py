@@ -2,6 +2,7 @@ import base64
 import os
 
 from botocore.vendored import requests
+
 from core.providers.base import MusicProvider
 
 SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
@@ -10,7 +11,6 @@ SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
 class Spotify(MusicProvider):
     NAME = 'Spotify'
     _MUSIC_URL = 'https://open.spotify.com/track/{}'
-
 
     def get_access_token(self):
         api_url = 'https://accounts.spotify.com/api/token'
@@ -61,8 +61,6 @@ class Spotify(MusicProvider):
         return {
             "Authorization": f'Bearer {self.get_access_token()}'
         }
-
-
 
     @classmethod
     def is_music_url(self, url):
