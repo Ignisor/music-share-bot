@@ -29,7 +29,7 @@ class Deezer(MusicProvider):
         resp.raise_for_status()
 
         data = resp.json()
-        track_id = data['data'][0]['link']
+        track_id = data['data'][0]['id']
         url = self._MUSIC_URL.format(track_id)
         return url
 
