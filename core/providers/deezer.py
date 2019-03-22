@@ -33,7 +33,8 @@ class Deezer(MusicProvider):
         url = self._MUSIC_URL.format(track_id)
         return url
 
-    def __id_from_url(self, url):
+    @staticmethod
+    def __id_from_url(url):
         id_search = url.split('/')[-1]
         return id_search
 
