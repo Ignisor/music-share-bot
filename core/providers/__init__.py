@@ -5,4 +5,5 @@ from core.providers.youtube import YouTube
 from core.providers.youtube_music import YouTubeMusic
 
 
-ALL_PROVIDERS = {AppleMusic, Deezer, Spotify, YouTube, YouTubeMusic}
+INPUT_PROVIDERS = (YouTubeMusic, AppleMusic, Deezer, Spotify)
+OUTPUT_PROVIDERS = (YouTube, YouTubeMusic, AppleMusic, Deezer, Spotify)
