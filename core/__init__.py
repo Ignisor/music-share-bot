@@ -1,4 +1,4 @@
-from core.providers import ALL_PROVIDERS
+from core.providers import OUTPUT_PROVIDERS
 from core.urls import UrlsExtractor
 
 BOT_RESPONSE = '{music_urls}'
@@ -17,7 +17,7 @@ def process_message(message):
             return None
         musics[name] = []
 
-        for provider in ALL_PROVIDERS:
+        for provider in OUTPUT_PROVIDERS:
             if type(url.provider) == provider:
                 alternative_url = f'[{provider.NAME}]({url.url})'
             else:
