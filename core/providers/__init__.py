@@ -7,4 +7,4 @@ from core.providers.google_music import GoogleMusic
 
 
 INPUT_PROVIDERS = (YouTubeMusic, AppleMusic, Deezer, Spotify, GoogleMusic)
-OUTPUT_PROVIDERS = (YouTube, YouTubeMusic, AppleMusic, Deezer, Spotify)
+OUTPUT_PROVIDERS = (YouTube, YouTubeMusic, AppleMusic, Deezer, Spotify, GoogleMusic)

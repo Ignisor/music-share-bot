@@ -15,7 +15,7 @@ class GoogleMusic(MusicProvider):
         return False
 
     def get_music_url(self, name):
-        pass
+        raise NotImplementedError
 
 
     def get_music_name(self, url):
