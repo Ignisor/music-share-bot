@@ -17,7 +17,7 @@ Python 3.7
 ## Installation
 -   Clone the project:
     ```bash
-    git clone git@github.com:inter-ikea/BSA-FBP-DWHETL-Logging.git
+    git clone git@github.com:Ignisor/music-share-bot.git
     ```
 
 -   Install requirements:
