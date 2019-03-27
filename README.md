@@ -7,9 +7,10 @@ Python 3.7
 ## Currently supported providers and interfaces
 ### Providers (music services)
 -   [YouTube Music](https://music.youtube.com/)
--   [YouTube](https://www.youtube.com/)
+-   [YouTube](https://www.youtube.com/) (Input only)
 -   [Spotify](https://www.spotify.com/)
 -   [Apple Music](https://www.apple.com/ru/apple-music/)
+-   [Google Play Music](https://play.google.com/music)
 
 ### Interfaces (apps and bots)
 -   [Telegram](https://telegram.org/)
@@ -49,7 +50,7 @@ Bot token must be specified in `TELEGRAM_BOT_TOKEN` environment variable.
 ## Contributing
 Pull requests are welcome. `dev` - is the main branch. For major changes, please open an issue first to discuss what you would like to change.
 
-Don't forget to update README if needed.
+Don't forget to update **README.md** and **requirements.txt** if needed.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
