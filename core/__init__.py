@@ -15,6 +15,11 @@ def process_message(message):
         name = url.get_name()
         if not name:
             return None
+
+        # if user sent two links to one song we skip 2nd..n
+        if musics.get(name):
+            continue
+
         musics[name] = []
 
         for provider in OUTPUT_PROVIDERS:
