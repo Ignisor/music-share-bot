@@ -31,7 +31,8 @@ class TelegramInterface(BotInterface):
         for handler in handlers:
             self.dispatcher.add_handler(handler)
 
-    def _handle_message(self, bot, update):
+    @staticmethod
+    def _handle_message(bot, update):
         text = update.message.text
         response = process_message(text)
 
@@ -46,7 +47,8 @@ class TelegramInterface(BotInterface):
                 reply_markup=response_keyboard
             )
 
-    def _handle_mismatch_button(self, bot, update):
+    @staticmethod
+    def _handle_mismatch_button(bot, update):
         if TelegramInterface.ADMINS_CHAT:
             user_message_id = update.callback_query.message.reply_to_message.message_id
             bad_response_message_id = update.callback_query.message.message_id
