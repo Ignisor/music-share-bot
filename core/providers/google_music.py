@@ -9,7 +9,7 @@ class GoogleMusic(MusicProvider):
 
     @classmethod
     def is_music_url(self, url):
-        if 'https://play.google.com/music' in url:
+        if 'play.google.com/music' in url:
             return True
 
         return False
