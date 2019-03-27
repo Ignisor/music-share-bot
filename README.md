@@ -7,10 +7,10 @@ Python 3.7
 ## Currently supported providers and interfaces
 ### Providers (music services)
 -   [YouTube Music](https://music.youtube.com/)
--   [YouTube](https://www.youtube.com/) (Input only)
+-   [YouTube](https://www.youtube.com/) (Output only)
 -   [Spotify](https://www.spotify.com/)
 -   [Apple Music](https://www.apple.com/ru/apple-music/)
--   [Google Play Music](https://play.google.com/music)
+-   [Google Play Music](https://play.google.com/music) (Input only)
 
 ### Interfaces (apps and bots)
 -   [Telegram](https://telegram.org/)
