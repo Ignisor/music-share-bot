@@ -1,6 +1,6 @@
 import os
 
-from telegram import Bot, Update, MessageEntity, InlineKeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup
+from telegram import Bot, Update, MessageEntity, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Dispatcher, MessageHandler, Filters, Updater, CallbackQueryHandler
 
 from core import process_message
