@@ -1,6 +1,6 @@
 import re
 
-from core.providers import ALL_PROVIDERS
+from core.providers import INPUT_PROVIDERS
 
 
 class MusicUrl(object):
@@ -17,7 +17,7 @@ class MusicUrl(object):
         return self.__provider
 
     def __get_provider(self):
-        for provider_cls in ALL_PROVIDERS:
+        for provider_cls in INPUT_PROVIDERS:
             if provider_cls.is_music_url(self.url):
                 return provider_cls()
 
@@ -38,10 +38,13 @@ class UrlsExtractor(object):
     @classmethod
     def get_music_urls(cls, message):
         urls = cls.get_urls(message)
+        unique_urls = set()
         for url in urls:
-            music_url = cls.__to_music_url(url)
-            if music_url:
-                yield music_url
+            if url not in unique_urls:
+                unique_urls.add(url)
+                music_url = cls.__to_music_url(url)
+                if music_url:
+                    yield music_url
 
     @classmethod
     def __to_music_url(cls, url):
@@ -50,6 +53,6 @@ class UrlsExtractor(object):
         :param url: url to parse
         :return: MusicUrl
         """
-        for provider in ALL_PROVIDERS:
+        for provider in INPUT_PROVIDERS:
             if provider.is_music_url(url):
                 return MusicUrl(url, provider())
