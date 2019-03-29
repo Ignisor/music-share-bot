@@ -38,10 +38,13 @@ class UrlsExtractor(object):
     @classmethod
     def get_music_urls(cls, message):
         urls = cls.get_urls(message)
+        unique_urls = set()
         for url in urls:
-            music_url = cls.__to_music_url(url)
-            if music_url:
-                yield music_url
+            if url not in unique_urls:
+                unique_urls.add(url)
+                music_url = cls.__to_music_url(url)
+                if music_url:
+                    yield music_url
 
     @classmethod
     def __to_music_url(cls, url):
