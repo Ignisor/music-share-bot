@@ -49,19 +49,22 @@ class TelegramInterface(BotInterface):
 
     @staticmethod
     def _handle_mismatch_button(bot, update):
-        if TelegramInterface.ADMINS_CHAT:
-            user_message_id = update.callback_query.message.reply_to_message.message_id
-            bad_response_message_id = update.callback_query.message.message_id
-            message_chat_id = update.callback_query.message.chat.id
+        if not TelegramInterface.ADMINS_CHAT:
+            return
 
-            bot.forwardMessage(chat_id=TelegramInterface.ADMINS_CHAT, from_chat_id=message_chat_id,
-                               message_id=user_message_id)
-            bot.forwardMessage(chat_id=TelegramInterface.ADMINS_CHAT, from_chat_id=message_chat_id,
-                               message_id=bad_response_message_id)
+        user_message_id = update.callback_query.message.reply_to_message.message_id
+        bad_response_message_id = update.callback_query.message.message_id
+        message_chat_id = update.callback_query.message.chat.id
 
-            bot.edit_message_reply_markup(chat_id=message_chat_id,
-                                  message_id=bad_response_message_id,
-                                  reply_markup=None)
+        bot.forwardMessage(chat_id=TelegramInterface.ADMINS_CHAT, from_chat_id=message_chat_id,
+                           message_id=user_message_id)
+        bot.forwardMessage(chat_id=TelegramInterface.ADMINS_CHAT, from_chat_id=message_chat_id,
+                           message_id=bad_response_message_id)
+
+        bot.edit_message_reply_markup(chat_id=message_chat_id,
+                                      message_id=bad_response_message_id,
+                                      reply_markup=None)
+
 
 
     def process_message(self, message_data):
@@ -70,12 +73,15 @@ class TelegramInterface(BotInterface):
 
     @staticmethod
     def get_keyboard(message):
-        if TelegramInterface.ADMINS_CHAT:
-            message_id = message.message_id
-            feedback_button = InlineKeyboardButton(text="report mismatch",
-                                                   callback_data='/bad_response {}'.format(message_id))
-            buttons = [[feedback_button]]
-            return InlineKeyboardMarkup(inline_keyboard=buttons)
+        if not TelegramInterface.ADMINS_CHAT:
+            return
+
+        message_id = message.message_id
+        feedback_button = InlineKeyboardButton(text="report mismatch",
+                                               callback_data='/bad_response {}'.format(message_id))
+        buttons = [[feedback_button]]
+        return InlineKeyboardMarkup(inline_keyboard=buttons)
+
 
 
 
