@@ -10,6 +10,7 @@ Python 3.7
 -   [YouTube](https://www.youtube.com/) (Output only)
 -   [Spotify](https://www.spotify.com/)
 -   [Apple Music](https://www.apple.com/ru/apple-music/)
+-   [Deezer](https://www.deezer.com)
 -   [Google Play Music](https://play.google.com/music) (Input only)
 
 ### Interfaces (apps and bots)
