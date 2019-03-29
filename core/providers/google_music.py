@@ -25,3 +25,5 @@ class GoogleMusic(MusicProvider):
         artist = soup.find('div', class_='album-artist fade-out')
         if title and artist:
             return f'{artist.text} - {title.text}'
+
+        return soup.find('meta', property='og:title').get('content')
