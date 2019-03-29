@@ -33,7 +33,7 @@ Python 3.7
 	-   YOUTUBE_API_KEY - API key for youtube API
 
 -   Optional environment variables:
-    -   ADMINS_CHAT - if you set admins chat (eg @our_chat) bot messages will have 'report button'. if click - bot forwards messages to admins chat
+    	-   BOT_ADMINS_CHAT - if you set admins chat (eg @our_chat) bot messages will have 'report button'. if click - bot forwards messages to admins chat
 
 ### For development
 -   Install local requirements:
