@@ -21,7 +21,7 @@ class GoogleMusic(MusicProvider):
     def get_music_name(self, url):
         g_music_page = requests.get(url)
         soup = BeautifulSoup(g_music_page.content, 'html.parser')
-        title = soup.find('div', class_='title fade-out')
-        artist = soup.find('div', class_='album-artist fade-out')
-        if title and artist:
-            return f'{artist.text} - {title.text}'
+        title_and_artist_tag = soup.find('meta', property='og:title')
+
+        if title_and_artist_tag:
+            return title_and_artist_tag.get('content')
