@@ -11,7 +11,7 @@ Python 3.7
 -   [Spotify](https://www.spotify.com/)
 -   [Apple Music](https://www.apple.com/ru/apple-music/)
 -   [Deezer](https://www.deezer.com)
--   [Google Play Music](https://play.google.com/music) (Input only)
+-   [Google Play Music](https://play.google.com/music)
 
 ### Interfaces (apps and bots)
 -   [Telegram](https://telegram.org/)
