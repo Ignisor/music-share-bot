@@ -2,7 +2,6 @@ from botocore.vendored import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-
 from core.providers.base import MusicProvider
 
 G_LISTEN_URL_TEMPLATE = 'https://play.google.com/music/m/{song_id}?t={title}'
