@@ -1,7 +1,7 @@
 import os
 
 from telegram import Bot, Update, MessageEntity, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Dispatcher, MessageHandler, Filters, Updater, CallbackQueryHandler
+from telegram.ext import Dispatcher, MessageHandler, Filters, Updater, CallbackQueryHandler, CommandHandler
 
 from core import process_message
 from interfaces.base import BotInterface
@@ -29,9 +29,9 @@ class TelegramInterface(BotInterface):
                 self._handle_message
             ),
 
-            MessageHandler(
-              Filters.regex('/start|/help'),
-              self._handle_init_message
+            CommandHandler(
+                ['start', 'help'],
+                self._handle_init_message
             ),
 
             CallbackQueryHandler(
