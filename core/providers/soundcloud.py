@@ -18,9 +18,15 @@ class SoundCloud(MusicProvider):
         title_and_artist_tag = soup.find('title')
 
         if title_and_artist_tag:
-            song_title = title_and_artist_tag.text.split('|')[0]
-            song_title_split = song_title.split(' by ')
-            return f'{song_title_split[0]}'
+            song_info = title_and_artist_tag.text.split('|')[0]
+            artist_and_title = song_info.split(' by ')[0]
+
+            # it is my observation, could be just some garbage in the name
+            if len(artist_and_title) > 40:
+                title = artist_and_title.split(' - ')[1]
+                if title:
+                    return f'{title}'
+            return f'{artist_and_title}'
 
     def get_music_url(self, name):
         api_url = 'https://api-v2.soundcloud.com/search'
