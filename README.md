@@ -12,6 +12,7 @@ Python 3.7
 -   [Apple Music](https://www.apple.com/ru/apple-music/)
 -   [Deezer](https://www.deezer.com)
 -   [Google Play Music](https://play.google.com/music)
+-   [SoundCloud](https://soundcloud.com/)
 
 ### Interfaces (apps and bots)
 -   [Telegram](https://telegram.org/)
@@ -31,6 +32,7 @@ Python 3.7
 	-   SPOTIFY_CLIENT_ID - client ID for Spotify API
 	-   SPOTIFY_CLIENT_SECRET - client secret key for Spotify API
 	-   YOUTUBE_API_KEY - API key for youtube API
+	-   SOUNDCLOUD_CLIENT_ID - API key for SoundCloud API
 
 -   Optional environment variables:
     	
