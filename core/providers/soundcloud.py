@@ -24,8 +24,7 @@ class SoundCloud(MusicProvider):
             # it is my observation, could be just some garbage in the name
             if len(artist_and_title) > 40:
                 title = artist_and_title.split(' - ')[1]
-                if title:
-                    return f'{title}'
+                return f'{title}'
             return f'{artist_and_title}'
 
     def get_music_url(self, name):

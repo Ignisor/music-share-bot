@@ -32,6 +32,7 @@ Python 3.7
 	-   SPOTIFY_CLIENT_ID - client ID for Spotify API
 	-   SPOTIFY_CLIENT_SECRET - client secret key for Spotify API
 	-   YOUTUBE_API_KEY - API key for youtube API
+	-   SOUNDCLOUD_CLIENT_ID - API key for SoundCloud API
 
 -   Optional environment variables:
     	-   BOT_ADMINS_CHAT - if you set admins chat (eg @our_chat) bot messages will have 'report button'. if click - bot forwards messages to admins chat
