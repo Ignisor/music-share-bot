@@ -34,6 +34,7 @@ Python 3.7
 
 -   Optional environment variables:
     	-   BOT_ADMINS_CHAT - if you set admins chat (eg @our_chat) bot messages will have 'report button'. if click - bot forwards messages to admins chat
+	-    EXAMPLE_MEDIA - if you example photo/gif URL it will be shown on /start and /help user commands
 
 ### For development
 -   Install local requirements:
