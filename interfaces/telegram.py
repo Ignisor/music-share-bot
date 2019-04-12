@@ -62,7 +62,7 @@ class TelegramInterface(BotInterface):
     def _handle_init_message(bot, update):
 
         if TelegramInterface.EXAMPLE_FILE_URL:
-            bot.sendPhoto(chat_id=update.message.chat.id, photo=TelegramInterface.EXAMPLE_FILE_URL,
+            bot.sendVideo(chat_id=update.message.chat.id, video=TelegramInterface.EXAMPLE_FILE_URL,
                           caption=WELCOME_MSG)
         else:
             bot.sendMessage(chat_id=update.message.chat.id, text=WELCOME_MSG)
