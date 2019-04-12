@@ -4,7 +4,8 @@ from core.providers.spotify import Spotify
 from core.providers.youtube import YouTube
 from core.providers.youtube_music import YouTubeMusic
 from core.providers.google_music import GoogleMusic
+from core.providers.soundcloud import SoundCloud
 
 
-INPUT_PROVIDERS = (YouTubeMusic, AppleMusic, Deezer, Spotify, GoogleMusic)
-OUTPUT_PROVIDERS = (YouTube, YouTubeMusic, AppleMusic, Deezer, Spotify, GoogleMusic)
+INPUT_PROVIDERS = (YouTubeMusic, AppleMusic, Deezer, GoogleMusic, SoundCloud, Spotify )
+OUTPUT_PROVIDERS = (YouTube, YouTubeMusic, AppleMusic, Deezer, GoogleMusic, SoundCloud, Spotify)
