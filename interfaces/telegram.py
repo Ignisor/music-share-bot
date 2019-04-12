@@ -7,9 +7,15 @@ from core import process_message
 from interfaces.base import BotInterface
 
 
+WELCOME_MSG = """🎧  Just send me an url from any streaming service
+
+🎸 I can work in groups as well"""
+
+
 class TelegramInterface(BotInterface):
     API_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
     ADMINS_CHAT = os.environ.get('BOT_ADMINS_CHAT')
+    EXAMPLE_FILE_URL = os.getenv('EXAMPLE_MEDIA')
 
     def __init__(self):
         self.bot = Bot(self.API_TOKEN)
@@ -21,6 +27,11 @@ class TelegramInterface(BotInterface):
             MessageHandler(
                 Filters.text & (Filters.entity(MessageEntity.URL) | Filters.entity(MessageEntity.TEXT_LINK)),
                 self._handle_message
+            ),
+
+            MessageHandler(
+              Filters.regex('/start|/help'),
+              self._handle_init_message
             ),
 
             CallbackQueryHandler(
@@ -46,6 +57,16 @@ class TelegramInterface(BotInterface):
                 disable_notification=True,
                 reply_markup=response_keyboard
             )
+
+    @staticmethod
+    def _handle_init_message(bot, update):
+
+        if TelegramInterface.EXAMPLE_FILE_URL:
+            bot.sendPhoto(chat_id=update.message.chat.id, photo=TelegramInterface.EXAMPLE_FILE_URL,
+                          caption=WELCOME_MSG)
+        else:
+            bot.sendMessage(chat_id=update.message.chat.id, text=WELCOME_MSG)
+
 
     @staticmethod
     def _handle_mismatch_button(bot, update):
