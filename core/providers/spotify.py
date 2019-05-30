@@ -1,7 +1,7 @@
 import base64
 import os
 
-from botocore.vendored import requests
+import requests
 
 from core.providers.base import MusicProvider
 

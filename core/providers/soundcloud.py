@@ -1,6 +1,6 @@
 import os
 
-from botocore.vendored import requests
+import requests
 from bs4 import BeautifulSoup
 
 from core.providers.base import MusicProvider

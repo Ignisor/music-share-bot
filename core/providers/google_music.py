@@ -1,4 +1,4 @@
-from botocore.vendored import requests
+import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
