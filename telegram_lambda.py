@@ -3,7 +3,7 @@ import json
 from interfaces.telegram import TelegramInterface
 
 
-def lambda_handler(event, context):
+def aws_lambda_handler(event, context):
     message_data = json.loads(event['body'])
     interface = TelegramInterface()
 
