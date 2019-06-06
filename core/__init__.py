@@ -27,7 +27,7 @@ def process_message(message):
                 alternative_url = f'[{provider.NAME}]({url.url})'
             else:
                 try:
-                    alternative_url = f'[{provider.NAME}]({provider().get_music_url(name)})'
+                    alternative_url = f'[{provider.NAME}]({provider().get_music_url(name).replace("’", "")})'
                 except Exception:
                     alternative_url = None
 
