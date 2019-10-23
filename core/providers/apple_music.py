@@ -50,7 +50,7 @@ class AppleMusic(MusicProvider):
 
     @classmethod
     def is_music_url(self, url):
-        if 'itunes.apple' in url:
+        if 'music.apple' in url:
             return True
 
         return False
