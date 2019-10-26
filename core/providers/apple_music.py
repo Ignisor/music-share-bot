@@ -8,7 +8,7 @@ from core.providers.base import MusicProvider
 class AppleMusic(MusicProvider):
     NAME = 'Apple Music'
     _ID_REGEX = re.compile(r'\?.*i=([\w]+)')
-    _MUSIC_URL = 'https://itunes.apple.com/us/album/{}/{}?i={}'
+    _MUSIC_URL = 'https://music.apple.com/us/album/{}/{}?i={}'
 
     def get_music_name(self, url):
         api_url = 'https://itunes.apple.com/lookup'
