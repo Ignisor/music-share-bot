@@ -67,7 +67,6 @@ class TelegramInterface(BotInterface):
         else:
             bot.sendMessage(chat_id=update.message.chat.id, text=WELCOME_MSG)
 
-
     @staticmethod
     def _handle_mismatch_button(bot, update):
         if not TelegramInterface.ADMINS_CHAT:
@@ -86,8 +85,6 @@ class TelegramInterface(BotInterface):
                                       message_id=bad_response_message_id,
                                       reply_markup=None)
 
-
-
     def process_message(self, message_data):
         update = Update.de_json(message_data, self.bot)
         self.dispatcher.process_update(update)
@@ -102,8 +99,6 @@ class TelegramInterface(BotInterface):
                                                callback_data='/bad_response {}'.format(message_id))
         buttons = [[feedback_button]]
         return InlineKeyboardMarkup(inline_keyboard=buttons)
-
-
 
 
 class TelegramUpdaterInterface(TelegramInterface):
