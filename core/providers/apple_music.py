@@ -9,6 +9,7 @@ class AppleMusic(MusicProvider):
     NAME = 'Apple Music'
     _ID_REGEX = re.compile(r'\?.*i=([\w]+)')
     _MUSIC_URL = 'https://music.apple.com/us/album/{}/{}?i={}'
+    _DOMAINS = ['music.apple', 'itunes.apple']
 
     def get_music_name(self, url):
         api_url = 'https://itunes.apple.com/lookup'
@@ -50,7 +51,8 @@ class AppleMusic(MusicProvider):
 
     @classmethod
     def is_music_url(self, url):
-        if 'music.apple' in url:
-            return True
+        for domain in self._DOMAINS:
+            if domain in url:
+                return True
 
         return False
