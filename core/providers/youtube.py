@@ -10,7 +10,7 @@ YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
 
 class YouTube(MusicProvider):
     NAME = 'YouTube'
-    _ID_REGEX = re.compile(r'\?.*v=([\w]+)')
+    _ID_REGEX = re.compile(r'\?.*v=([\w-]+)')
     _MUSIC_URL = 'https://youtube.com/watch?v={}'
 
     def get_music_name(self, url):
@@ -23,7 +23,6 @@ class YouTube(MusicProvider):
         }
         resp = requests.get(url=api_url, params=params)
         resp.raise_for_status()
-
         data = resp.json()
         description = data['items'][0]['snippet']['description']
         lines = [line for line in description.split('\n') if line]
