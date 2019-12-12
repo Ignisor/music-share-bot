@@ -35,7 +35,9 @@ def process_message(message):
                 musics[name].append(alternative_url)
 
     musics_texts = []
+    song_name = None
     for name, music_urls in musics.items():
+        song_name = name
         musics_texts.append(MUSIC_FROMAT.format(name=name, urls='\n'.join(music_urls)))
 
     if musics_texts:
@@ -43,4 +45,4 @@ def process_message(message):
     else:
         response = None
 
-    return response
+    return response, song_name
