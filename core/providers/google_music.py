@@ -24,8 +24,8 @@ class GoogleMusic(MusicProvider):
         return False
 
     @staticmethod
-    def get_search_res_divs(songs__div):
-        return [i.getchildren() for i in songs__div][0]
+    def get_search_res_divs(songs_div):
+        return [i for i in songs_div if i.tag == 'div']
 
     def get_music_url(self, name):
         encoded_name = urllib.parse.quote_plus(name)
@@ -36,7 +36,7 @@ class GoogleMusic(MusicProvider):
             main_div = tree.xpath("/html/body/div[1]/div[4]/c-wiz/div")
 
             h2_songs_tag = [h for h in main_div[0].xpath('.//h2[text()="Songs"]')]
-            search_res_divs = self.get_search_res_divs(h2_songs_tag[0].getparent().getparent().getparent().getnext())
+            search_res_divs = self.get_search_res_divs(h2_songs_tag[0].getparent().getparent().getnext())
             if not search_res_divs:
                 search_res_divs = self.get_search_res_divs(h2_songs_tag[0].getparent().getparent().getparent().getnext())
 

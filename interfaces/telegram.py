@@ -1,13 +1,23 @@
 import os
+from uuid import uuid4
 
-from telegram import Bot, Update, MessageEntity, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Dispatcher, MessageHandler, Filters, Updater, CallbackQueryHandler, CommandHandler
-
+from telegram import (
+    Bot,
+    Update,
+    MessageEntity,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQueryResultArticle,
+    ParseMode,
+    InputTextMessageContent
+)
+from telegram.ext import Dispatcher, MessageHandler, Filters, Updater, CallbackQueryHandler, CommandHandler, InlineQueryHandler
 from core import process_message
 from interfaces.base import BotInterface
 
 
-WELCOME_MSG = """🎧  Just send me an url from any streaming service
+WELCOME_MSG = """🎧  Just send me an url from any streaming service 
+or type @MusicSharingBot in any chat to use inline query
 
 🎸 I can work in groups as well"""
 
@@ -36,6 +46,11 @@ class TelegramInterface(BotInterface):
 
             CallbackQueryHandler(
                 self._handle_mismatch_button
+            ),
+
+            InlineQueryHandler(
+                self._handle_inline_query,
+                pattern=r'(https?://[^\s]+)'
             )
         ]
 
@@ -43,10 +58,29 @@ class TelegramInterface(BotInterface):
             self.dispatcher.add_handler(handler)
 
     @staticmethod
+    def _handle_inline_query(bot, update):
+        """Handle the inline query."""
+        query = update.inline_query.query
+        response, title = process_message(query)
+        results = [
+            InlineQueryResultArticle(
+                id=uuid4(),
+                title=title,
+                input_message_content=InputTextMessageContent(
+                    response,
+                    parse_mode=ParseMode.MARKDOWN,
+                    disable_web_page_preview=True
+                ),
+            ),
+
+        ]
+
+        update.inline_query.answer(results)
+
+    @staticmethod
     def _handle_message(bot, update):
         text = update.message.text
-        response = process_message(text)
-
+        response, _ = process_message(text)
         response_keyboard = TelegramInterface.get_keyboard(update.message)
 
         if response:
