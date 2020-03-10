@@ -14,5 +14,6 @@ OUTPUT_PROVIDERS = (
     AppleMusic,
     Deezer,
     GoogleMusic,
-    # SoundCloud,
-    Spotify)
+    SoundCloud,
+    Spotify
+)
